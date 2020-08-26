@@ -96,6 +96,33 @@
   </div>
 
 <script>
+  // 1.recuperer tous les chexkbox
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastchecked;
+
+
+  // 3. cree une fonction qui a pour condition l'evenement de 'shiftKey' et checked
+  function handleCheck (e){
+
+    let inBetween = false;
+
+    if(e.shiftKey && this.checked){
+      checkboxes.forEach(checkbox => {
+        console.log(checkbox);
+        if (checkbox === this || checkbox === lastchecked){
+          inBetween = !inBetween;
+        }
+
+        if (inBetween){
+          checkbox.checked = true;
+        }
+
+      })
+    }
+    lastchecked = this;
+  }
+  // 2. creer une boucle et une fonction flechée qui permettra d'ecouter la checkbox au click
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click',handleCheck));
 </script>
 </body>
 </html>
